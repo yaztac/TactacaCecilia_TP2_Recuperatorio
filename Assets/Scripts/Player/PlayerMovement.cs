@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header ("Movement Settings")]
-    [SerializeField] private float speed;
+    [SerializeField] private float baseSpeed;
+    private float currentSpeedMultiplier = 1f;
     [SerializeField] private float jumpForce;
     [SerializeField] private float rotationSpeed;
     private float moveHorizontal;
@@ -52,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
 
         Vector3 movement = (camForward * moveVertical + camRight * moveHorizontal).normalized;
-        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+        float finalSpeed = baseSpeed * currentSpeedMultiplier;
+        rb.linearVelocity = new Vector3(movement.x * finalSpeed, rb.linearVelocity.y, movement.z * finalSpeed);
 
         if (movement.sqrMagnitude > 0.01f)
         {
@@ -70,5 +72,16 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(origin, Vector3.down * rayDistance, ColorRay);
     }
 
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        currentSpeedMultiplier = multiplier;
+        Debug.Log($"Velocidad actual: {baseSpeed * currentSpeedMultiplier}");
+    }
+
+    public void ResetSpeedMultiplier()
+    {
+        currentSpeedMultiplier = 1f;
+        Debug.Log($"Velocidad actual: {baseSpeed * currentSpeedMultiplier}");
+    }
 
 }
