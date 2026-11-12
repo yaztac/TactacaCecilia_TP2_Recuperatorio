@@ -1,9 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Computer : MonoBehaviour, IInteractable
 {
+    [Header("Computer Settings")]
     [SerializeField] private string terminalName = "Terminal #1";
     private bool isHacked = false;
+
+    [Header("Door Reference")]
+    [SerializeField] private GameObject door;
 
     public void Interact()
     {
@@ -13,6 +18,13 @@ public class Computer : MonoBehaviour, IInteractable
             Debug.Log($"Has hackeado: {terminalName}!");
             //Cambiar de color
             GetComponent<Renderer>().material.color = Color.green;
+
+            if(door != null)
+            {
+                door.SetActive(false);
+                Debug.Log("La puerta se ha abierto!");
+            }
+            
         }
         else
         {
