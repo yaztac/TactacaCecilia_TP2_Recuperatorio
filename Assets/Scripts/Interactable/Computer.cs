@@ -8,7 +8,7 @@ public class Computer : MonoBehaviour, IInteractable
     private bool isHacked = false;
 
     [Header("Door Reference")]
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject[] door;
 
     public void Interact()
     {
@@ -21,7 +21,10 @@ public class Computer : MonoBehaviour, IInteractable
 
             if(door != null)
             {
-                door.SetActive(false);
+                foreach (GameObject d in door)
+                {
+                    d.SetActive(false);
+                }
                 Debug.Log("La puerta se ha abierto!");
             }
             
