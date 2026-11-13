@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -28,9 +29,14 @@ public class EnemyAI : MonoBehaviour
 
     private bool isStunned;
 
+    private HealthSystem healthSystemPlayer;
+    private Attack attack;
+      
+   
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        attack = GetComponent<Attack>();
     }
     void Start()
     {
@@ -38,6 +44,7 @@ public class EnemyAI : MonoBehaviour
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
+            healthSystemPlayer = playerObj.GetComponent<HealthSystem>();
         }
         else
         {
@@ -52,7 +59,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (isStunned || playerTransform == null)
+        if (isStunned || playerTransform == null || healthSystemPlayer != null && healthSystemPlayer.IsDead)
         {
             agent.isStopped = true;
             return;
@@ -115,15 +122,19 @@ public class EnemyAI : MonoBehaviour
     {
 
         transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
+        
         // Transicion de regreso a Persecucion si se aleja
 
         if (distanceToPlayer > attackRadius && !isAttacking)
         {
             currentState = AIState.Chase;
+            isAttacking = false;
+            GetComponent<Renderer>().material.color = Color.gray;
             return;
         }
         if (!isAttacking)
         {
+            isAttacking = true;
             StartCoroutine(AttackCooldown());
         }
 
@@ -143,18 +154,27 @@ public class EnemyAI : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        Debug.Log("Ataque  contra el jugador");
         
+        if (healthSystemPlayer != null)
+        {
+            Debug.Log("Ataque  contra el jugador");
+            //Cambiar de color
+            GetComponent<Renderer>().material.color = Color.black;
+            attack.Melee();
+        }
+
+
     }
    
     private IEnumerator WaitAndMoveToNextPoint()
     {
         isWaitingAtPoint = true;
+        agent.isStopped = true;
         yield return new WaitForSeconds(waitTimeAtPoint);
 
         if (patrolPoints.Length > 0)
         {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;//2%3
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
             GoToNextPatrolPoint();
         }
 
