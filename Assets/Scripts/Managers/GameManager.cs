@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         }
 
         HealthSystem health = player.GetComponent<HealthSystem>();
-        ScoreSystem score = player.GetComponent<ScoreSystem>();
+        ScoreManager score = player.GetComponent<ScoreManager>();
         if (health == null || score == null) return;
 
         int currentHealth = health.CurrentHealth;

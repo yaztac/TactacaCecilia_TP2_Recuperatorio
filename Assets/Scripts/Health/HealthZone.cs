@@ -83,7 +83,7 @@ public class HealthZone : MonoBehaviour
         vfx.SetActive(false);
         GetComponent<Renderer>().material.color = Color.white;
 
-        // Iniciamos el tiempo de descanso/enfriamiento de la zona
+        // Iniciamos el tiempo de descanso de la zona
         StartCoroutine(CooldownRoutine());
     }
 
