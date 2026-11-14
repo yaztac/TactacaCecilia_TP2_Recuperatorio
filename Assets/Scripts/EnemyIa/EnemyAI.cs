@@ -31,15 +31,25 @@ public class EnemyAI : MonoBehaviour
 
     private HealthSystem healthSystemPlayer;
     private Attack attack;
+
+    //Color 
+    private Renderer enemyRenderer;
+    private Color originalColor;
       
    
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         attack = GetComponent<Attack>();
+        enemyRenderer = GetComponent<Renderer>();
     }
     void Start()
     {
+        if (enemyRenderer != null)
+        {
+            originalColor = enemyRenderer.material.color;
+        }
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -129,7 +139,10 @@ public class EnemyAI : MonoBehaviour
         {
             currentState = AIState.Chase;
             isAttacking = false;
-            GetComponent<Renderer>().material.color = Color.gray;
+            if (enemyRenderer != null)
+            {
+                enemyRenderer.material.color = originalColor;
+            }
             return;
         }
         if (!isAttacking)
@@ -158,8 +171,10 @@ public class EnemyAI : MonoBehaviour
         if (healthSystemPlayer != null)
         {
             Debug.Log("Ataque  contra el jugador");
-            //Cambiar de color
-            GetComponent<Renderer>().material.color = Color.black;
+            if (enemyRenderer != null)
+            {
+                enemyRenderer.material.color = Color.black;
+            }
             attack.Melee();
         }
 
@@ -207,10 +222,18 @@ public class EnemyAI : MonoBehaviour
     {
         isStunned = true;
         agent.isStopped = true;
+
+        if (enemyRenderer != null)
+        {
+            enemyRenderer.material.color = Color.white;
+        }
         Debug.Log($"Aturdido por {duration} segundos");
 
         yield return new WaitForSeconds(duration);
-
+        if (enemyRenderer != null)
+        {
+            enemyRenderer.material.color = originalColor;
+        }
         isStunned = false;
         agent.isStopped = false;
         Debug.Log("Recuperado del aturdimiento");

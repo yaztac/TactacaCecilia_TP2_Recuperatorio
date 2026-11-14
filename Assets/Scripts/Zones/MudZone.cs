@@ -11,6 +11,7 @@ public class MudZone : MonoBehaviour
         PlayerMovement player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
+            Debug.Log("Velocidad reducida");
             player.SetSpeedMultiplier(speedMultiplier);
         }
     }

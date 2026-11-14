@@ -5,7 +5,7 @@ public class HealthSystem : MonoBehaviour
 {
     [Header("Health Settings")]
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private int currentHealth;
     public int CurrentHealth => currentHealth;//usamos getter y setter para el gameManager - solo lectura
     public int MaxHealth => maxHealth; 
@@ -66,7 +66,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = "Salud: " + currentHealth;
+            healthText.text = currentHealth + " HP";
         }
     }
 }
