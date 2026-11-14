@@ -5,7 +5,14 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header ("Movement Settings")]
     [SerializeField] private float baseSpeed;
+    private float finalSpeed;
     private float currentSpeedMultiplier = 1f;
+
+    public float Speed
+    {
+        get { return finalSpeed; }
+        set { finalSpeed = value; }
+    }
     [SerializeField] private float jumpForce;
     [SerializeField] private float rotationSpeed;
     private float moveHorizontal;
@@ -53,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
 
         Vector3 movement = (camForward * moveVertical + camRight * moveHorizontal).normalized;
-        float finalSpeed = baseSpeed * currentSpeedMultiplier;
+        finalSpeed = baseSpeed * currentSpeedMultiplier;
         rb.linearVelocity = new Vector3(movement.x * finalSpeed, rb.linearVelocity.y, movement.z * finalSpeed);
 
         if (movement.sqrMagnitude > 0.01f)
