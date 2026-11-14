@@ -26,12 +26,15 @@ También se encontrará con centinelas que lo atacaran, de los cuales se puede d
 --- 
 ## 📸 Capturas de Pantalla  
 
-![Vista General del Escenario]()
-*Figura 1: Layout del escenario (Greyboxing) mostrando el punto de inicio.*
-![Vista General del Escenario](docs/jueg)
-*Figura 2: Zona de las plataformas móviles.*
-![Vista General del Escenario](docs/jue)
-*Figura 3: Zona de spawn y la zona de meta.*
+*Figura 1: Victoria.*
+![Victoria](docs/victoria.png)
+
+*Figura 2: Enemigo atacando.*
+![Enemigo atacando](docs/enemigo2.png)
+
+*Figura 3: Enemigo paralizado.*
+![Enemigo paralizado](docs/enemigo1.png)
+
 --- 
 ## ⚙️ Mecánicas Implementadas
 
