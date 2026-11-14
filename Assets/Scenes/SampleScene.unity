@@ -23921,6 +23921,7 @@ GameObject:
   - component: {fileID: 1385711075}
   - component: {fileID: 1385711076}
   - component: {fileID: 1385711077}
+  - component: {fileID: 1385711078}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -23937,7 +23938,7 @@ Transform:
   m_GameObject: {fileID: 1385711066}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 244.5, y: 1.22, z: 173.5}
+  m_LocalPosition: {x: 183.5, y: 1.22, z: 180}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24118,6 +24119,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   score: 0
   pointsText: {fileID: 2122321707}
+--- !u!114 &1385711078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385711066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd45df4b93fd70c41a66f2af1c8c53a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRaycastAttack
+  firePoint: {fileID: 620113567}
+  rayDistance: 15
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  stunDuration: 5
 --- !u!1001 &1388425873
 PrefabInstance:
   m_ObjectHideFlags: 0
