@@ -31,7 +31,7 @@ public class PlayerRaycastAttack : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Stun(stunDuration);
-                Debug.Log("¡Ataque de rayo exitoso! Enemigo paralizado y blanqueado.");
+                Debug.Log("¡Ataque paralizador exitoso!");
             }
         }
     }

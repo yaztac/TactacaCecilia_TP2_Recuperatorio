@@ -15,6 +15,22 @@ public class HealthZone : MonoBehaviour
     private HealthSystem currentPlayerHealth;
     private Coroutine healingCoroutine;
 
+    //Color 
+    private Renderer renderer;
+    private Color originalColor;
+
+    private void Awake()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
+    void Start()
+    {
+        if (renderer != null)
+        {
+            originalColor = renderer.material.color;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (isDisabled) return;
@@ -81,7 +97,7 @@ public class HealthZone : MonoBehaviour
         StopHealing();
         isDisabled = true;
         vfx.SetActive(false);
-        GetComponent<Renderer>().material.color = Color.white;
+        renderer.material.color = Color.white;
 
         // Iniciamos el tiempo de descanso de la zona
         StartCoroutine(CooldownRoutine());
@@ -93,7 +109,7 @@ public class HealthZone : MonoBehaviour
 
         // Volvemos a habilitar la zona
         isDisabled = false;
-        GetComponent<Renderer>().material.color = Color.blue;
+        renderer.material.color = originalColor;
         Debug.Log("<color=green>La zona de salud se ha vuelto a habilitar.</color>");
     }
 }

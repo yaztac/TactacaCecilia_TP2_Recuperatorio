@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
 
         //pausa inputs
-        if (Input.GetKeyDown(KeyCode.P) && currentState == GameState.Playing)
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Paused();
         }

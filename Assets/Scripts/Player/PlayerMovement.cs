@@ -82,13 +82,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetSpeedMultiplier(float multiplier)
     {
         currentSpeedMultiplier = multiplier;
-        Debug.Log($"Velocidad actual: {baseSpeed * currentSpeedMultiplier}");
     }
 
     public void ResetSpeedMultiplier()
     {
         currentSpeedMultiplier = 1f;
-        Debug.Log($"Velocidad actual: {baseSpeed * currentSpeedMultiplier}");
     }
 
 }
