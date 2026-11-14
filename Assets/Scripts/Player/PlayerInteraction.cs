@@ -29,8 +29,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactableObject != null)
             {
-                Debug.Log("Has chocado con un interactuable, presiona E");
-
+                
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     interactableObject.Interact();

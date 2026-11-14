@@ -34,14 +34,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ChangeState(GameState.Start);
-        ChangeState(GameState.Playing);
     }
 
     
     void Update()
     {
+        if (currentState == GameState.Start)
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                ChangeState(GameState.Playing);
+            }
+        }
+
         //pausa inputs
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && currentState == GameState.Playing)
         {
             Paused();
         }
@@ -53,8 +60,8 @@ public class GameManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.Start:
-                Time.timeScale = 1f;//0f - 1f
-                Debug.Log("Inicio el juego");
+                Time.timeScale = 0f;//0f se detiene - 1f se mueve normal
+                Debug.Log("<color=orange>Inicio el juego. Presiona ENTER</color>");
                 break;
             case GameState.Playing:
                 Time.timeScale = 1f;
@@ -66,7 +73,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Victory:
                 Time.timeScale = 0f;
-                //corrutina para detener el tiempo
                 Debug.Log("<color=cyan>ESTADO: Victoria</color>");
                 break;
             case GameState.GameOver:
@@ -130,8 +136,8 @@ public class GameManager : MonoBehaviour
             lastScore = currentScore;
 
             Debug.Log(
-                "<color=red>❤️ Salud actual: " + lastHealth + "</color>\n" +
-                "<color=yellow>⭐ Puntuación: " + lastScore + "</color>\n");
+                "<color=red>Salud actual: " + lastHealth + "</color>\n" +
+                "<color=yellow>Puntuación: " + lastScore + "</color>\n");
         }
     }
 }
